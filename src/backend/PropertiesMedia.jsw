@@ -1,0 +1,19 @@
+import { Permissions, webMethod } from "wix-web-module";
+import { mediaManager } from "wix-media-backend";
+
+
+export const deleteUnusedFiles = webMethod(
+  Permissions.Anyone,
+  (fileUrls) => {
+    return mediaManager
+      .moveFilesToTrash(fileUrls)
+      .then(() => {
+        console.log("Success! Files have been trashed.");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  },
+);
+
+
